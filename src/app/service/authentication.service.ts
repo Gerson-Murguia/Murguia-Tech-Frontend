@@ -14,10 +14,18 @@ export class AuthenticationService {
   
    }
 
-   public login(user:User):Observable<HttpResponse<any>> | HttpErrorResponse{
+   public login(user:User):Observable<HttpResponse<any> | HttpErrorResponse>{
 
     return this.http.post<HttpResponse<any>| HttpErrorResponse>(
       `${this.host}/user/login`, user,{observe:'response'});
       //por default da el body, con el observe se pide la response completa, con response,headers,body
    }
+
+  public register(user:User):Observable<User | HttpErrorResponse>{
+
+    return this.http.post<User| HttpErrorResponse>(
+      `${this.host}/user/register`, user);
+   }
+
+   
 }
