@@ -3,15 +3,17 @@ import { HttpClient, HttpErrorResponse , HttpResponse } from '@angular/common/ht
 import { environment} from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private host:string=environment.apiUrl;
+  public host:string=environment.apiUrl;
   private token:string="";
   private loggedInUsername: string="";
-  
+  private helper = new JwtHelperService();
+
   constructor(private http:HttpClient) {
   
    }
@@ -36,5 +38,54 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     localStorage.removeItem('users');
   }
-   
+
+  public saveToken(token:string):void{
+    this.token=token;
+    localStorage.setItem('token',token);
+  }
+
+  public addUserToLocalCache(user:User):void{
+    
+    localStorage.setItem('user',JSON.stringify(user));
+  }
+
+  
+  public getUserToLocalCache():User{
+  
+    return JSON.parse(localStorage.getItem('user') || '{}');
+  }
+
+  public loadToken():void{
+  
+      this.token=localStorage.getItem('token') || '';
+  }
+
+  //getter
+  public getToken():string{
+  
+    return this.token;
+  }
+
+  public isLoggedIn():boolean{
+    //obtener token del localstorage
+    this.loadToken();
+    if (this.token!=null&& this.token !='') {
+      
+      if (this.helper.decodeToken(this.token).sub != null || '') {
+
+        if (!this.helper.isTokenExpired(this.token)) {
+          this.loggedInUsername=this.helper.decodeToken(this.token).sub;
+          return true;
+        }else{
+          return false;
+        }   
+      }else{
+        return true;
+      }
+    }else{
+      this.logOut();
+      return false;
+    }
+  }
+
 }
