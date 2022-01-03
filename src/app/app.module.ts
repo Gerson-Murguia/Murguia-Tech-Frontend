@@ -5,16 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthenticationGuard } from './guard/authentication.guard';
-import { NotifierModule } from 'angular-notifier';
+import { NotificationModule } from './notification.module';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NotifierModule
+    NotificationModule
   ],
   providers: [AuthenticationGuard,{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
