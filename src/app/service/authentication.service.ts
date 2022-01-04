@@ -18,16 +18,16 @@ export class AuthenticationService {
   
    }
 
-   public login(user:User):Observable<HttpResponse<any> | HttpErrorResponse>{
+   public login(user:User):Observable<HttpResponse<any>>{
 
     return this.http.post<HttpResponse<any>| HttpErrorResponse>(
       `${this.host}/user/login`, user,{observe:'response'});
       //por default da el body, con el observe se pide la response completa, con response,headers,body
    }
 
-  public register(user:User):Observable<User | HttpErrorResponse>{
+  public register(user:User):Observable<User>{
 
-    return this.http.post<User| HttpErrorResponse>(
+    return this.http.post<User>(
       `${this.host}/user/register`, user);
   }
 
@@ -69,6 +69,7 @@ export class AuthenticationService {
   public isLoggedIn():boolean{
     //obtener token del localstorage
     this.loadToken();
+    
     if (this.token!=null&& this.token !='') {
       
       if (this.helper.decodeToken(this.token).sub != null || '') {
