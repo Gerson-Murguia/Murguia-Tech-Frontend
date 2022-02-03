@@ -12,17 +12,23 @@ export class User{
     public joinDate:Date;
     public roles:string;
     public authorities:[];
-    public isActive:boolean;
-    public isNotLocked:boolean;    
+    public active:boolean;
+    public notLocked:boolean;    
 
     constructor(){
-        this.firstName ='',
-        this.lastName='',
-        this.username ='',
-        this.email ='',
-        this.isActive =false,
-        this.isNotLocked =false,
-        this.roles='',
-        this.authorities=[]
+        this.id=0;
+        this.userId='';
+        this.firstName ='';
+        this.lastName='';
+        this.username ='';
+        this.email ='';
+        this.lastLoginDate=null;
+        this.lastLoginDateDisplay=null;
+        this.joinDate=null;
+        this.profileImageUrl='';
+        this.active =false;
+        this.notLocked =false;
+        this.roles='';
+        this.authorities=[];
     }
 }

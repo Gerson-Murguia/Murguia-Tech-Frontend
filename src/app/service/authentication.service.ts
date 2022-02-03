@@ -18,9 +18,9 @@ export class AuthenticationService {
   
    }
 
-   public login(user:User):Observable<HttpResponse<any>>{
+   public login(user:User):Observable<HttpResponse<User>>{
 
-    return this.http.post<HttpResponse<any>| HttpErrorResponse>(
+    return this.http.post<User>(
       `${this.host}/user/login`, user,{observe:'response'});
       //por default da el body, con el observe se pide la response completa, con response,headers,body
    }

@@ -13,29 +13,29 @@ export class UserService {
   private host=environment.apiUrl;
   constructor(private http:HttpClient) { }
 
-  public getUsers(): Observable<User[] | HttpErrorResponse>{
+  public getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.host}/user/list`);
   }
 
-  public addUser(formData: FormData): Observable<User| HttpErrorResponse>{
+  public addUser(formData: FormData): Observable<User>{
     return this.http.post<User>(`${this.host}/user/add`,formData);
   }
 
-  public updateUser(formData: FormData): Observable<User| HttpErrorResponse>{
+  public updateUser(formData: FormData): Observable<User>{
     return this.http.post<User>(`${this.host}/user/update`,formData);
   }
 
   //retorna un httpResponse personalizado
-  public resetPassword(email:string): Observable<CustomHttpResponse| HttpErrorResponse>{
+  public resetPassword(email:string): Observable<CustomHttpResponse>{
     return this.http.get<any>(`${this.host}/user/resetPassword/${email}`);
   }
 
   //trackea el progreso del update de la imagen
-  public updateProfileImage(formData: FormData): Observable<HttpEvent<User>| HttpErrorResponse>{
+  public updateProfileImage(formData: FormData): Observable<HttpEvent<User>>{
     return this.http.post<User>(`${this.host}/user/updateProfileImage`,formData,{reportProgress:true,observe:'events'});
   }
 
-  public deleteUser(userId:number): Observable<CustomHttpResponse | HttpErrorResponse>{
+  public deleteUser(userId:number): Observable<CustomHttpResponse>{
     return this.http.delete<any>(`${this.host}/user/delete/${userId}`);
   }
 
@@ -60,15 +60,15 @@ export class UserService {
     formData.append('lastName',user.lastName);
     formData.append('username',user.username);
     formData.append('email',user.email);
-    formData.append('roles',user.roles);
+    formData.append('role',user.roles);
     formData.append('profileImage',profileImage);
-    formData.append('isActive',JSON.stringify(user.isActive));
-    formData.append('isNotLocked',JSON.stringify(user.isNotLocked));
+    formData.append('isActive',JSON.stringify(user.active));
+    formData.append('isNotLocked',JSON.stringify(user.notLocked));
 
     return formData;
   }
 
-  public getUser(username:string): Observable<User | HttpErrorResponse>{
+  public getUser(username:string): Observable<User>{
     return this.http.get<User>(`${this.host}/user/find/${username}`);
   }
 

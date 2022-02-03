@@ -1,4 +1,4 @@
-<section class='bg-dark text-white'>
+<section class='login bg-dark text-white'>
     <div class="row g-0">
         <div class="col-lg-7 d-none d-lg-block">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -10,14 +10,14 @@
                     <div class="carousel-item active min-vh-100">
                         <img src="../../assets/img/login/1.jpg" class="d-block w-100 vh-100 foto" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5 class="font-weight-bold">LOS MEJORES PLATOS</h5>
+                            <h5 class="font-weight-bold">MURGUIA TECH</h5>
                             <a class="text-muted text-decoration-none" href="#"> Visita nuestra tienda online</a>
                         </div>
                     </div>
                     <div class="carousel-item min-vh-100">
                         <img src="../../assets/img/login/2.jpg" class="d-block w-100 vh-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5 class="font-weight-bold">DESCUBRE LA MEJOR COMIDA</h5>
+                            <h5 class="font-weight-bold">MURGUIA TECH</h5>
                             <a class="text-muted text-decoration-none" href="#"> Visita nuestra tienda online</a>
                         </div>
                     </div>
@@ -39,18 +39,18 @@
             </div>       
             <div class="px-lg-5 w-100 px-3">
                 <!--FORM-->
-                <form class="mb-4" action="/login" method="POST">
-                    <div class="mb-2">
+                <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" class="mb-4" method="POST">
+                    <div class="form-group mb-2">
                         <label for="username" class="form-label font-weight-bold">Email</label>
-                        <input type="text" class="form-control border-0 mb-2" name="username" id="username"
-                            placeholder="Ingresa tu email" aria-describedby="emailHelp">
-                        <span class="help-block" style="color:red;">Ingresa tu nombre de usuario.</span>
+                        <input type="text" ngModel #usernameInput="ngModel" class="form-control border-0 mb-2" name="username" id="username"
+                            placeholder="Ingresa tu email" aria-describedby="emailHelp" required>
+                        <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Ingresa un nombre de usuario.</span>
                     </div>
-                    <div class="mb-2">
+                    <div class="form-group mb-2">
                         <label for="password" class="form-label font-weight-bold">Contraseña</label>
-                        <input type="password" name="password" id="password" class="form-control border-0 "
-                            placeholder="Ingresa tu contraseña">
-                        <span class="help-block" style="color:red;">Ingresa una contraseña.</span>
+                        <input type="password" ngModel #passwordInput="ngModel" name="password" id="password" class="form-control border-0 "
+                            placeholder="Ingresa tu contraseña" required>
+                        <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched">Ingresa una contraseña.</span>
 
                     </div>
                     <br/>
@@ -58,17 +58,17 @@
                         contraseña?</a>
 
                     <div class="mb-4">
-                        <button type="submit" class="btn btn-light w-100">
-                            <i class="fa fa-circle-notch fa-spin" aria-hidden="true"></i>&nbsp;&nbsp;
-                            <span>Cargando...</span>
-                            <span>Iniciar Sesión</span> 
+                        <button type="submit" [disabled]="loginForm.invalid || showLoading" class="btn btn-light w-100">
+                            <i *ngIf="showLoading" class="fa fa-circle-notch fa-spin" aria-hidden="true"></i>&nbsp;&nbsp;
+                            <span *ngIf="showLoading">Cargando...</span>
+                            <span *ngIf="!showLoading">Iniciar Sesión</span> 
                         </button>
                         
                     </div>
                 </form>
             
                 <div class="text-center px-lg-5 pt-lg-3 pb-lg-0 p-2 w-100">
-                    <p class="d-inline-block mb-2">¿Todavia no tienes una cuenta? <a href="registro"
+                    <p class="d-inline-block mb-2">¿Todavia no tienes una cuenta? <a routerLink="/registro"
                             class="text-light font-weight-bold text-decoration-none d-inline-block text-decoration-underline">Crea
                             una ahora</a></p>
                 </div>

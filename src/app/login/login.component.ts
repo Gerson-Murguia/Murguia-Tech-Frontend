@@ -5,6 +5,7 @@ import { User } from '../model/user';
 import { AuthenticationService } from '../service/authentication.service';
 import { NotificationService } from '../service/notification.service';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { NotificationType } from '../enum/notification-type.enum';
 
 @Component({
   selector: 'app-login',
@@ -23,28 +24,43 @@ export class LoginComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     if (this.authenticationService.isLoggedIn()) {
       this.router.navigateByUrl('/user/administracion');
-    }else{
-      this.router.navigateByUrl('/register');
     }
-    
   }
 
 
 
   public onLogin(user:User):void{
     this.showLoading=true;
-    console.log(user);
     this.subscriptions.push(this.authenticationService.login(user)
       .subscribe(
-        (response:HttpResponse<User>|HttpErrorResponse) => {
+        (response:HttpResponse<User>) => {
           const token=response.headers.get('Jwt-Token');
-
+          console.log(token)
+          //guardado en variable y local storage
+          this.authenticationService.saveToken(token!);
+          this.authenticationService.addUserToLocalCache(response.body!);
+          this.router.navigateByUrl('/user/administracion');
+          this.showLoading=false;
+        },
+        (errorResponse:HttpErrorResponse)=>{
+          console.log(errorResponse);
+          this.sendNotificationError(NotificationType.ERROR,errorResponse.error.message);
+          this.showLoading=false;
         }
+
       )
     );
   }
+  sendNotificationError(ERROR: NotificationType, message: any):void {
+    if (message) {
+      this.notificationService.showNotification(ERROR,message);
+    }else{
+      this.notificationService.showNotification(ERROR,'Ocurrio un error. Por favor, intentelo de nuevo');
+    }
+  }
 
   ngOnDestroy(): void {
-
+    this.subscriptions.forEach(sub=>sub.unsubscribe())
   }
+
 }

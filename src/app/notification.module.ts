@@ -6,8 +6,8 @@ import { AppComponent } from "./app.component";
 const customNotifierOptions: NotifierOptions = {
   position: {
 		horizontal: {
-			position: 'left',
-			distance: 150
+			position: 'right',
+			distance: 12
 		},
 		vertical: {
 			position: 'bottom',
