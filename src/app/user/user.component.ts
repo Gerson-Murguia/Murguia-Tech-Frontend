@@ -140,8 +140,9 @@ export class UserComponent implements OnInit {
     console.log(file+' '+ this.filename)
   }
 
-  public onResetPassword(email:string){
+  public onResetPassword(emailForm:NgForm){
     this.refreshing=true;
+    const email=emailForm.value['resetPasswordEmail'];
     this.subscriptions.push(
       this.userService.resetPassword(email).subscribe(
         (response:CustomHttpResponse)=>{
@@ -152,7 +153,8 @@ export class UserComponent implements OnInit {
           this.sendNotification(NotificationType.ERROR,error.error.message);
           this.refreshing=false;
 
-        }
+        },
+        ()=>{emailForm.reset()}
       )
     );
   }

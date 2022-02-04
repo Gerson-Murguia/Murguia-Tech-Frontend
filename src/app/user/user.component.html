@@ -7,22 +7,28 @@
     <!-- nav bar -->
     <nav class="col-8  mx-auto navbar navbar-expand-md breadcrumb">
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="nav nav-pills">
-                <a class="nav-item nav-link active ml-1" (click)="changeTitle('Users')" data-toggle="tab">
-                    <i class="fa fa-users"></i>
-                    Usuarios
-                </a>
-                <a  class="nav-item nav-link ml-3 " 
-                    data-toggle="tab" (click)="changeTitle('Settings')">
-                    <i class="fa fa-cogs"></i>
-                    Configuracion
-                </a>
-                <a class="nav-item nav-link move-right mr-3" data-toggle="tab"
-                    (click)="changeTitle('Profile')" >
-                    Bienvenido,
-                    <i class="fa fa-user"></i>
-                </a>
-            </div>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active ml-1" (click)="changeTitle('Users')" data-bs-toggle="tab" data-bs-target="#users">
+                        <i class="fa fa-users"></i>
+                        Usuarios
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link ml-3 " 
+                        data-bs-toggle="tab" (click)="changeTitle('Settings')" data-bs-target="#reset-password">
+                        <i class="fa fa-cogs"></i>
+                        Configuracion
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link move-right mr-3" data-bs-toggle="tab" data-bs-target="#profile"
+                        (click)="changeTitle('Profile')" >
+                        Bienvenido,
+                        <i class="fa fa-user"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 </div>
@@ -30,7 +36,7 @@
 <!-- main content -->
 <div class="tab-content col-10 mx-auto mt-4" id="myTabContent">
     <!-- user table -->
-    <div class="tab-pane fade show active" id="users">
+    <div class="tab-pane fade show active" role="tabpanel" id="users">
         <div class="mb-3 float-end">
             <div class="btn-group">
                 <form  class="form-inline my-2 my-lg-0 justify-content-center">
@@ -89,12 +95,35 @@
             </tbody>
         </table>
     </div>
+    
+    <button [hidden]=true type="button" id="openUserInfo" data-bs-toggle="modal" data-bs-target="#viewUserModal">
+    </button>
+    <button [hidden]="true" type="button" id="openUserEdit" data-bs-toggle="modal" data-bs-target="#editUserModal">
+    </button>
+    
+    <div class="tab-pane fade" role="tabpanel" id="reset-password">
+        <form>
+            <fieldset>
+                <legend>Administrador de Contraseña de Usuario</legend>
+                <div class="form-group">
+                    <label for="resetPasswordEmail">Correo Electronico</label>
+                    <input type="email" placeholder="Ingresa el correo electronico" name="resetPasswordEmail"
+                        id="resetPasswordEmail" ngModel class="form-control" required>
+                    <small class="form-text text-muted">No compartiremos tu correo con nadie más.</small>
+                </div>
+                <button type="submit" [disabled]="false" class="btn btn-primary">
+                    <i *ngIf="refreshing" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+                    <span *ngIf="refreshing" class=>Cargando...</span>
+                    <span *ngIf="!refreshing">Cambiar Contraseña</span>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+
 </div>
 
-<button [hidden]=true type="button" id="openUserInfo" data-bs-toggle="modal" data-bs-target="#viewUserModal" >
-</button>
-<button [hidden]="true" type="button" id="openUserEdit" data-bs-toggle="modal" data-bs-target="#editUserModal">
-</button>
+
+
 
 <!--modal user info-->
 <div class="modal fade" id="viewUserModal" tabindex="-1" aria-labelledby=""
