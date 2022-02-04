@@ -7,6 +7,7 @@ import { NotificationType } from '../enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { CustomHttpResponse } from '../model/custom-http-response';
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -18,6 +19,7 @@ export class UserComponent implements OnInit {
   private titleSubject=new BehaviorSubject<string>('Users');
   public titleAction$=this.titleSubject.asObservable();
   public users:User[];
+  public user:User;
   public refreshing: boolean;
   private subscriptions: Subscription[] = [];
   public selectedUser: User;
@@ -25,9 +27,12 @@ export class UserComponent implements OnInit {
   public filename: string;
   public editUser= new User();
   private currentUsername:string;
-  constructor(private userService:UserService,private notificationService:NotificationService) { }
+  constructor(private userService:UserService,
+    private authenticationService:AuthenticationService,
+    private notificationService:NotificationService) { }
 
   ngOnInit(): void {
+    this.user=this.authenticationService.getUserFromLocalCache()
     this.getUsers(true);
   }
 
@@ -51,9 +56,7 @@ export class UserComponent implements OnInit {
           this.refreshing=false;
       }
     ));
-
   }
-
 
   public onSelectUser(selectedUser:User):void{
     this.selectedUser=selectedUser;
@@ -150,7 +153,7 @@ export class UserComponent implements OnInit {
           this.refreshing=false;
         },
         (error:HttpErrorResponse)=>{
-          this.sendNotification(NotificationType.ERROR,error.error.message);
+          this.sendNotification(NotificationType.WARNING,error.error.message);
           this.refreshing=false;
 
         },

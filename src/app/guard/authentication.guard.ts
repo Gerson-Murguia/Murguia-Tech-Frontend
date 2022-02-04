@@ -27,7 +27,7 @@ export class AuthenticationGuard implements CanActivate {
     }
     this.router.navigate(['/login']);
     //TODO: mandar notificacion a user
-    this.notificationService.showNotification(NotificationType.ERROR,'Necesitas logearte para acceder a esta pagina'.toUpperCase());
+    this.notificationService.showNotification(NotificationType.ERROR,'Necesitas logearte para acceder a esta pagina');
     return false;
   }
 }

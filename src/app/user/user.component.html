@@ -95,14 +95,14 @@
             </tbody>
         </table>
     </div>
-    
+
     <button [hidden]=true type="button" id="openUserInfo" data-bs-toggle="modal" data-bs-target="#viewUserModal">
     </button>
     <button [hidden]="true" type="button" id="openUserEdit" data-bs-toggle="modal" data-bs-target="#editUserModal">
     </button>
     
     <div class="tab-pane fade" role="tabpanel" id="reset-password">
-        <form>
+        <form #resetPasswordForm="ngForm" (ngSubmit)="onResetPassword(resetPasswordForm)">
             <fieldset>
                 <legend>Administrador de Contraseña de Usuario</legend>
                 <div class="form-group">
@@ -121,7 +121,6 @@
     </div>
 
 </div>
-
 
 
 

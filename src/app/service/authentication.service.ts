@@ -50,7 +50,7 @@ export class AuthenticationService {
   }
 
   
-  public getUserToLocalCache():User{
+  public getUserFromLocalCache():User{
   
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
