@@ -4,10 +4,12 @@ import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../enum/notification-type.enum';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { CustomHttpResponse } from '../model/custom-http-response';
 import { AuthenticationService } from '../service/authentication.service';
+import { Router } from '@angular/router';
+import { FileUploadStatus } from '../model/file-upload.status';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +18,7 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class UserComponent implements OnInit {
 
-  private titleSubject=new BehaviorSubject<string>('Users');
+  private titleSubject=new BehaviorSubject<string>('Lista de Usuarios');
   public titleAction$=this.titleSubject.asObservable();
   public users:User[];
   public user:User;
@@ -27,9 +29,13 @@ export class UserComponent implements OnInit {
   public filename: string;
   public editUser= new User();
   private currentUsername:string;
+  public fileStatus=new FileUploadStatus();
+
+
   constructor(private userService:UserService,
     private authenticationService:AuthenticationService,
-    private notificationService:NotificationService) { }
+    private notificationService:NotificationService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.user=this.authenticationService.getUserFromLocalCache()
@@ -56,6 +62,88 @@ export class UserComponent implements OnInit {
           this.refreshing=false;
       }
     ));
+  }
+
+  public onLogOut():void{
+    this.authenticationService.logOut();
+    this.router.navigate(['/login']);
+    this.sendNotification(NotificationType.SUCCESS,'Cierre de sesión exitoso');
+  }
+
+  public updateProfileImage():void{
+    this.clickButton('profileImageInput');
+  }
+
+  //muestra el progreso del evento de updateprofileimage
+  public onUpdateProfileImage():void{
+    const formData=new FormData();
+    formData.append('username',this.user.username);
+    formData.append('profileImage',this.profileImage);
+    this.subscriptions.push(
+      this.userService.updateProfileImage(formData).subscribe(
+        (event:HttpEvent<any>) =>{
+          this.reportProgress(event);
+        },
+        (errorResponse:HttpErrorResponse)=>{
+          this.sendNotification(NotificationType.ERROR,errorResponse.error?.message);
+        }
+      )
+    );
+
+
+
+  }
+  reportProgress(event:HttpEvent<any>):void {
+    switch (event.type) {
+      //cuando el evento esta en progreso
+      case HttpEventType.UploadProgress:
+        this.fileStatus.percentage=Math.round(100*event.loaded/event.total);
+        this.fileStatus.status='progress';
+        break;
+        //cuando el evento termina
+      case HttpEventType.Response:
+        if (event.status===200) {
+          this.user.profileImageUrl=`${event.body.profileImageUrl}?time=${new Date().getTime()}`
+          this.sendNotification(NotificationType.SUCCESS, `${event.body.firstName} Imagen de perfil actualizada`);          
+          this.fileStatus.status='done'
+          //refrescar el currentuser para actualizar la imagen
+          this.authenticationService.addUserToLocalCache(event.body);   
+          this.getUsers(false);
+        }else{
+          this.sendNotification(NotificationType.ERROR,`No se pudo actualizar la imagen`);
+        }
+        break;
+        default:
+          'Terminaron los procesos';
+        break;
+    }
+  }
+
+  public onUpdateCurrentUser(user:User):void{
+    this.refreshing=true;
+    this.currentUsername=this.authenticationService.getUserFromLocalCache().username;
+    const formData=this.userService.createUserFormData(this.currentUsername,user,this.profileImage);
+
+    this.subscriptions.push(
+      this.userService.updateUser(formData).subscribe(
+        (response:User)=>{
+          this.authenticationService.addUserToLocalCache(response);
+          this.getUsers(false);
+          this.filename=null;
+          this.profileImage=null;
+           this.refreshing=false;
+          this.sendNotification(NotificationType.SUCCESS,`${response.firstName} ${response.lastName} editado exitosamente`);
+          //refrescar cambios
+        
+        },
+        (errorResponse:HttpErrorResponse)=>{
+          this.sendNotification(NotificationType.ERROR,errorResponse.error.message);
+          this.profileImage=null;
+          this.refreshing=false;
+          console.log('Error onUpdateCurrentUser')
+        }
+      )
+    );
   }
 
   public onSelectUser(selectedUser:User):void{
