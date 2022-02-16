@@ -149,12 +149,13 @@
                                                 </div>
                                             </div>
                                             <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                                                <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user?.firstName}}
-                                                        {{user?.lastName}}</h4>
-                                                    <p class="mb-0">{{user?.username}}</p>
+                                                <div class="mb-2 mb-sm-0">
+                                                    <h4 class="pt-sm-2 pb-1 mb-0 ">{{user?.username}}</h4>
+                                                    <!--redundante
+                                                    <p class="mb-0">{{user?.firstName}}
+                                                    {{user?.lastName}}</p>-->
                                                     <div *ngIf="user?.lastLoginDateDisplay !== null" class="text-muted">
-                                                        <small>Last login:
+                                                        <small>Ultimo ingreso:
                                                             {{user?.lastLoginDateDisplay | date:'medium'}}</small></div>
                                                     <div class="mt-2">
                                                         <button (click)="updateProfileImage()" class="btn btn-primary"
@@ -180,14 +181,14 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>First Name</label>
+                                                                        <label>Nombres</label>
                                                                         <input type="text" name="firstName" required
                                                                             [(ngModel)]="user.firstName" class="form-control">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Last Name</label>
+                                                                        <label>Apellidos</label>
                                                                         <input type="text" name="lastName" required
                                                                             [(ngModel)]="user.lastName" class="form-control">
                                                                     </div>
@@ -196,7 +197,7 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Username</label>
+                                                                        <label>Nombre de usuario</label>
                                                                         <input type="text" name="username" required
                                                                             [(ngModel)]="user.username" class="form-control">
                                                                     </div>
@@ -214,8 +215,7 @@
                                                             <div class="row">
                                                                 <div class="col mb-3">
                                                                     <div class="form-group">
-                                                                        <label>Role</label><small>(read
-                                                                            only)</small>
+                                                                        <label>Rol </label><small>(solo lectura)</small>
                                                                         <select name="roles" required [(ngModel)]="user.roles"
                                                                             class="form-control">
                                                                             <option  value="ROLE_USER">USER
@@ -236,7 +236,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                                                            <div class="mb-2"><b>Account Settings</b></div>
+                                                            <div class="mb-2"><b>Configuracion de cuenta</b></div>
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="custom-controls-stacked px-2">
@@ -244,13 +244,13 @@
                                                                             <input name="active" type="checkbox"
                                                                                 [(ngModel)]="user.active"
                                                                                 class="custom-control-input">
-                                                                            <label class="custom-control-label">Active</label>
+                                                                            <label class="custom-control-label">Activo</label>
                                                                         </div>
                                                                         <div class="custom-control custom-checkbox">
                                                                             <input name="notLocked" type="checkbox"
                                                                                 [(ngModel)]="user.notLocked"
                                                                                 class="custom-control-input">
-                                                                            <label class="custom-control-label">Unlocked</label>
+                                                                            <label class="custom-control-label">Desbloqueado</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -262,8 +262,8 @@
                                                             <button class="btn btn-primary" type="submit">
                                                                 <i *ngIf="refreshing"
                                                                     class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
-                                                                <span *ngIf="refreshing">Loading...</span>
-                                                                <span *ngIf="!refreshing">Save Changes</span>
+                                                                <span *ngIf="refreshing">Cargando...</span>
+                                                                <span *ngIf="!refreshing">Guardar cambios</span>
                                                             </button>
                                                         </div>
                                                     </div>
