@@ -41,13 +41,13 @@
                 <!--FORM-->
                 <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" class="mb-4" method="POST">
                     <div class="form-group mb-2">
-                        <label for="username" class="form-label font-weight-bold">Email</label>
+                        <label for="username" class="form-label font-weight-bold">Email o nombre de usuario:</label>
                         <input type="text" ngModel #usernameInput="ngModel" class="form-control border-0 mb-2" name="username" id="username"
                             placeholder="Ingresa tu email" aria-describedby="emailHelp" required>
-                        <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Ingresa un nombre de usuario.</span>
+                        <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Ingresa tu email o nombre de usuario.</span>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="password" class="form-label font-weight-bold">Contraseña</label>
+                        <label for="password" class="form-label font-weight-bold">Contraseña:</label>
                         <input type="password" ngModel #passwordInput="ngModel" name="password" id="password" class="form-control border-0 "
                             placeholder="Ingresa tu contraseña" required>
                         <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched">Ingresa una contraseña.</span>
@@ -74,6 +74,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
