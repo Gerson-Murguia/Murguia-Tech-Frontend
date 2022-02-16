@@ -74,6 +74,15 @@ export class UserComponent implements OnInit {
     this.clickButton('profileImageInput');
   }
 
+  public onProfileImageChange(event:Event):void{
+    const target=event.target as HTMLInputElement;
+    const files=target.files as FileList;
+    const file:File=files[0];
+
+    this.filename=file.name;
+    this.profileImage=file;
+    console.log(file+' '+ this.filename)
+  }
   //muestra el progreso del evento de updateprofileimage
   public onUpdateProfileImage():void{
     const formData=new FormData();
@@ -221,15 +230,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  public onProfileImageChange(event:Event):void{
-    const target=event.target as HTMLInputElement;
-    const files=target.files as FileList;
-    const file:File=files[0];
 
-    this.filename=file.name;
-    this.profileImage=file;
-    console.log(file+' '+ this.filename)
-  }
 
   public onResetPassword(emailForm:NgForm){
     this.refreshing=true;
