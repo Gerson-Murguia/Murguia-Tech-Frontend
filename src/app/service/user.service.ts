@@ -35,8 +35,8 @@ export class UserService {
     return this.http.post<User>(`${this.host}/user/updateProfileImage`,formData,{reportProgress:true,observe:'events'});
   }
 
-  public deleteUser(userId:number): Observable<CustomHttpResponse>{
-    return this.http.delete<any>(`${this.host}/user/delete/${userId}`);
+  public deleteUser(username:string): Observable<CustomHttpResponse>{
+    return this.http.delete<any>(`${this.host}/user/delete/${username}`);
   }
 
   public addUsersToLocalCache(users:User[]): void{

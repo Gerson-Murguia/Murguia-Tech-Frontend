@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
     this.subscriptions.push(
       this.userService.updateProfileImage(formData).subscribe(
         (event:HttpEvent<any>) =>{
-          this.reportProgress(event);
+          this.reportUploadProgress(event);
         },
         (errorResponse:HttpErrorResponse)=>{
           this.sendNotification(NotificationType.ERROR,errorResponse.error?.message);
@@ -102,7 +102,7 @@ export class UserComponent implements OnInit {
 
 
   }
-  reportProgress(event:HttpEvent<any>):void {
+  reportUploadProgress(event:HttpEvent<any>):void {
     switch (event.type) {
       //cuando el evento esta en progreso
       case HttpEventType.UploadProgress:
@@ -187,9 +187,9 @@ export class UserComponent implements OnInit {
     
   }
 
-  public onDeleteUser(id:number):void{
+  public onDeleteUser(username:string):void{
     this.subscriptions.push(
-      this.userService.deleteUser(id).subscribe(
+      this.userService.deleteUser(username).subscribe(
         (response:CustomHttpResponse)=>{
           this.sendNotification(NotificationType.SUCCESS,  response.message);
           this.getUsers(false);
