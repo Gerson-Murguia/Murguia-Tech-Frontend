@@ -23,9 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
     if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)) {
          return httpHandler.handle(httpRequest);
     }
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/resetPassword`)) {
-         return httpHandler.handle(httpRequest);
-    }
 
     //antes de llegar a estas rutas agregar el token jwt
 

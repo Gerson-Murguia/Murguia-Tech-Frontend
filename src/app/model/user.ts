@@ -1,10 +1,8 @@
 export class User{
-    public id:number;
     public userId:string;
     public firstName:string;
     public lastName:string;
     public username:string;
-    public password:string;
     public email:string;
     public profileImageUrl:string;
     public lastLoginDate:Date;
@@ -16,7 +14,6 @@ export class User{
     public notLocked:boolean;    
 
     constructor(){
-        this.id=0;
         this.userId='';
         this.firstName ='';
         this.lastName='';
