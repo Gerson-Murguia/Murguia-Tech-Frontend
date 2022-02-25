@@ -10,6 +10,7 @@ import { CustomHttpResponse } from '../model/custom-http-response';
 import { AuthenticationService } from '../service/authentication.service';
 import { Router } from '@angular/router';
 import { FileUploadStatus } from '../model/file-upload.status';
+import { Role } from '../enum/rol.enum';
 
 @Component({
   selector: 'app-user',
@@ -270,6 +271,23 @@ export class UserComponent implements OnInit {
       this.users=this.userService.getUsersFromLocalCache();
     }
   }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole()==Role.ADMIN || this.getUserRole()==Role.SUPER_ADMIN;  
+  }
+
+  public get isManager(): boolean {
+    return this.getUserRole()==Role.MANAGER; 
+  }
+
+  public get isAdminOrManager(): boolean {
+    return this.isAdmin||this.isManager; 
+  }
+
+  public getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().roles;
+  }
+
 
   private clickButton(buttonId:string):void{
     document.getElementById(buttonId)?.click();
