@@ -11,14 +11,14 @@
                         <img src="../../assets/img/login/1.jpg" class="d-block w-100 vh-100 foto" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5 class="font-weight-bold">MURGUIA TECH</h5>
-                            <a class="text-muted text-decoration-none" href="#"> Visita nuestra tienda online</a>
+                            <a class="text-muted text-decoration-none" href="#"> Visita nuestra administrador de usuarios</a>
                         </div>
                     </div>
                     <div class="carousel-item min-vh-100">
                         <img src="../../assets/img/login/2.jpg" class="d-block w-100 vh-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5 class="font-weight-bold">MURGUIA TECH</h5>
-                            <a class="text-muted text-decoration-none" href="#"> Visita nuestra tienda online</a>
+                            <a class="text-muted text-decoration-none" href="#"> Visita nuestra administrador de usuarios</a>
                         </div>
                     </div>
                 </div>
@@ -41,10 +41,10 @@
                 <!--FORM-->
                 <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" class="mb-4" method="POST">
                     <div class="form-group mb-2">
-                        <label for="username" class="form-label font-weight-bold">Email o nombre de usuario:</label>
+                        <label for="username" class="form-label font-weight-bold">Nombre de usuario:</label>
                         <input type="text" ngModel #usernameInput="ngModel" class="form-control border-0 mb-2" name="username" id="username"
                             placeholder="Ingresa tu email" aria-describedby="emailHelp" required>
-                        <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Ingresa tu email o nombre de usuario.</span>
+                        <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Ingresa tu nombre de usuario.</span>
                     </div>
                     <div class="form-group mb-2">
                         <label for="password" class="form-label font-weight-bold">Contraseña:</label>
