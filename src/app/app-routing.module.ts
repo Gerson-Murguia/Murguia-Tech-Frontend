@@ -8,8 +8,9 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
 {path:'login', component: LoginComponent},
 {path:'registro', component:RegisterComponent},
-{path:'user/administracion', component:UserComponent,canActivate: [AuthenticationGuard]},
-{path:'', redirectTo:'/login', pathMatch:'full'}];
+{path:'', redirectTo:'/login', pathMatch:'full'},
+{path:'user/administracion', component:UserComponent,canActivate: [AuthenticationGuard]}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
