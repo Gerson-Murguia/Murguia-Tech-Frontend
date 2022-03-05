@@ -25,7 +25,7 @@ export class AuthenticationGuard implements CanActivate {
     if (this.authenticationService.isLoggedIn()) {
       return true;
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
     //TODO: mandar notificacion a user
     this.notificationService.showNotification(NotificationType.ERROR,'Necesitas logearte para acceder a esta pagina');
     return false;
