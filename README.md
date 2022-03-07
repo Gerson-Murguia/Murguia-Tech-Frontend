@@ -18,13 +18,13 @@
   - [Capturas](https://github.com/Gerson-Murguia/Murguia-Tech-Frontend/edit/master/README.md#capturas)
   - [Autor](https://github.com/Gerson-Murguia/Murguia-Tech-Frontend/edit/master/README.md#autor)
 
-## Tecnologias usadas:
+## Tecnologias usadas
   - Angular 12.
   - Bootstrap 5.
   - [angular-notifier](https://www.npmjs.com/package/angular-notifier).
   - [angular-jwt](https://www.npmjs.com/package/@auth0/angular-jwt).
   
-## Capturas:
+## Capturas
   - Inicio de sesión:
   
 ![murguiatech1](https://user-images.githubusercontent.com/76268781/156947973-ef7dd72f-1f26-4362-9bb6-5e6899cc45d7.png)
@@ -36,3 +36,9 @@
   - Perfil de usuario:
   
   ![murguiatech3](https://user-images.githubusercontent.com/76268781/156948036-565336d6-fbd0-491d-8771-baf02317577a.png)
+
+## Autor
+**Gerson Murguia Montes**
+Contactame por:
+- ![Whatsapp](https://wa.me/51960904798)
+- ![Linkedin](https://www.linkedin.com/in/gersonmurguia/)
