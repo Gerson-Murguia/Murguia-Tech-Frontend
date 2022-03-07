@@ -4,7 +4,13 @@
 # Descripción
   Esta aplicación web es la parte frontend del sitio web de administracion de usuario MurguiaTech.
   MurguiaTech es una aplicación web de administracion de usuarios que consume la API REST [Murguiatech](https://github.com/Gerson-Murguia/Murguia-Tech-Backend)(repo en Github).
-
+  Cuenta con funcionalidades como:
+  - Consumo de API REST.
+  - Autenticacion con JWT.
+  - Envio de correo con javax.mail para confirmación de cuenta.
+  - Notificaciones personalizadas con Angular Notifier.
+  - Proteccion contra Brute Force Attack mediante un caché de intentos máximos de logeo.
+   
   Hice esta aplicación web para practicar y reforzar mis conocimientos en Angular 12, especialmente en el consumo de APIS REST, autenticación con JWT y el manejo de componentes.
   
 # Tabla de Contenidos
