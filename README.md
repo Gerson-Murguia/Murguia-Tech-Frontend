@@ -8,7 +8,8 @@
   Hice esta aplicación web para practicar y reforzar mis conocimientos en Angular 12, especialmente en el consumo de APIS REST, autenticación con JWT y el manejo de componentes.
   
 # Tabla de Contenidos
-  - [Tecnologia usada](https://github.com/Gerson-Murguia/Murguia-Tech-Frontend/edit/master/README.md#tecnologia-usada)
+  - [Tecnologia usada](https://github.com/Gerson-Murguia/Murguia-Tech-Frontend/edit/master/README.md#tecnologias-usadas)
+  - [Capturas](https://github.com/Gerson-Murguia/Murguia-Tech-Frontend/edit/master/README.md#capturas)
   - [Autor](https://github.com/Gerson-Murguia/Murguia-Tech-Frontend/edit/master/README.md#autor)
 
 ## Tecnologias usadas:
