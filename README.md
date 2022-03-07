@@ -41,5 +41,5 @@
 **Gerson Murguia Montes**
 
 Contáctame por:
-- ![Whatsapp](https://wa.me/51960904798)
-- ![Linkedin](https://www.linkedin.com/in/gersonmurguia/)
+- [Whatsapp](https://wa.me/51960904798)
+- [Linkedin](https://www.linkedin.com/in/gersonmurguia/)
