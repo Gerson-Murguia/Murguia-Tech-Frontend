@@ -492,7 +492,7 @@
                         </div>
                         <div class="form-group">
                             <label for="authority">Rol <small [hidden]="isAdmin">(solo lectura)</small></label>
-                            <select name="roles" required [(ngModel)]="editUser.roles" class="form-control" [disabled]="!isAdmin">
+                            <select name="role" required [(ngModel)]="editUser.roles" class="form-control" [disabled]="!isAdmin">
                                 <option value="ROLE_USER">USUARIO</option>
                                 <option value="ROLE_HR">RECURSOS HUMANOS</option>
                                 <option value="ROLE_MANAGER">MANAGER</option>
